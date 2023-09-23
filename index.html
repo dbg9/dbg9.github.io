@@ -1,129 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人介绍 - debug967</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .page {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .page.active {
-            opacity: 1;
-        }
-        .page h1 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-        .page p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid #333;
-            transform: scale(0.8);
-            transition: transform 0.5s ease-in-out;
-        }
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-image:hover {
-            transform: scale(1.0);
-        }
-        #page1 {
-            background-color: #007bff;
-            color: #fff;
-        }
-        #page2 {
-            background-color: #333;
-            color: #fff;
-        }
-        #page3 {
-            background-color: #444;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(90deg, #3498db, #2ecc71);
+    }
+    .hello-world-container {
+      position: relative;
+      text-align: center;
+    }
+    .hello-world-text {
+      font-size: 36px;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid #fff;
+    }
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+    }
+    @keyframes explode {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(3);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div id="page1" class="page active">
-        <img class="profile-image" src="your-profile-image.jpg" alt="debug967">
-        <h1>debug967</h1>
-        <p>一名初中生个人开发者</p>
-    </div>
-    <div id="page2" class="page">
-        <h1>个人简介</h1>
-        <p>你好，我是debug967，一名热爱编程和开发的初中生。我喜欢编写代码，探索新的技术，以及构建有趣的项目。我在各种编程语言和技术领域有一定经验，包括：</p>
-        <ul>
-            <li>HTML/CSS</li>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Web开发</li>
-            <li>...</li>
-        </ul>
-        <p>我不仅对编程充满热情，还喜欢学习新知识，分享我的经验和项目。如果你对我的工作感兴趣，或者想合作开发项目，请随时与我联系。</p>
-    </div>
-    <div id="page3" class="page">
-        <!-- 添加更多页面内容，根据需要 -->
-    </div>
+  <div class="hello-world-container">
+    <div class="hello-world-text"></div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var helloWorldText = document.querySelector(".hello-world-text");
+      var textToType = "Welcome!";
+      var index = 0;
 
-    <!-- 使用JavaScript来实现吸附效果 -->
-    <script>
-        const pages = document.querySelectorAll('.page');
-        let isScrolling = false;
+      function typeText(i) {
+        if (i < textToType.length) {
+          helloWorldText.textContent += textToType.charAt(i);
+          index++;
+          setTimeout(function() {
+            typeText(i + 1);
+          }, 300); // Delay of 300 milliseconds (0.3 seconds)
+        } else {
+          // Remove the cursor after typing animation completes
+          setTimeout(function() {
+            helloWorldText.style.borderRight = "none";
+          }, 300); // Delay of 300 milliseconds (0.3 seconds)
 
-        function showPage(index) {
-            pages.forEach((page, pageIndex) => {
-                if (pageIndex === index) {
-                    page.classList.add('active');
-                } else {
-                    page.classList.remove('active');
-                }
-            });
+          // Trigger the explosion effect after removing the cursor
+          setTimeout(function() {
+            helloWorldText.style.animation = "explode 0.8s forwards";
+          }, 500); // Delay of 500 milliseconds (0.5 seconds) before the explosion
+
+          // Redirect to another page after 3 seconds
+          setTimeout(function() {
+            // Replace 'https://example.com' with the URL you want to redirect to
+            window.location.href = "https://example.com";
+          }, 3000); // Delay of 3000 milliseconds (3 seconds) for the redirect
         }
+      }
 
-        function throttle(func, wait) {
-            let timeout;
-            return function () {
-                if (!timeout) {
-                    timeout = setTimeout(() => {
-                        func();
-                        timeout = null;
-                    }, wait);
-                }
-            };
-        }
-
-        window.addEventListener('scroll', throttle(() => {
-            if (!isScrolling) {
-                const scrollTop = window.scrollY;
-                const windowHeight = window.innerHeight;
-                const pageIndex = Math.round(scrollTop / windowHeight);
-                showPage(pageIndex);
-                isScrolling = true;
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 500); // 500ms 内不响应滚动事件
-            }
-        }, 500)); // 设置滚动响应的间隔时间
-    </script>
+      typeText(0);
+    });
+  </script>
 </body>
 </html>
