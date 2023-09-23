@@ -7,7 +7,6 @@
     <style>
         body {
             font-family: 'Helvetica Neue', sans-serif;
-            background-color: #f7f7f7;
             margin: 0;
             padding: 0;
         }
@@ -20,12 +19,10 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
         }
         .page.active {
             opacity: 1;
-            transform: translateY(0);
         }
         .page h1 {
             font-size: 36px;
@@ -91,19 +88,42 @@
     <!-- 使用JavaScript来实现吸附效果 -->
     <script>
         const pages = document.querySelectorAll('.page');
-        let currentPageIndex = 0;
+        let isScrolling = false;
 
         function showPage(index) {
-            pages[currentPageIndex].classList.remove('active');
-            pages[index].classList.add('active');
-            currentPageIndex = index;
+            pages.forEach((page, pageIndex) => {
+                if (pageIndex === index) {
+                    page.classList.add('active');
+                } else {
+                    page.classList.remove('active');
+                }
+            });
         }
 
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const pageIndex = Math.floor(scrollY / window.innerHeight);
-            showPage(pageIndex);
-        });
+        function throttle(func, wait) {
+            let timeout;
+            return function () {
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        func();
+                        timeout = null;
+                    }, wait);
+                }
+            };
+        }
+
+        window.addEventListener('scroll', throttle(() => {
+            if (!isScrolling) {
+                const scrollTop = window.scrollY;
+                const windowHeight = window.innerHeight;
+                const pageIndex = Math.round(scrollTop / windowHeight);
+                showPage(pageIndex);
+                isScrolling = true;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500); // 500ms 内不响应滚动事件
+            }
+        }, 500)); // 设置滚动响应的间隔时间
     </script>
 </body>
 </html>
