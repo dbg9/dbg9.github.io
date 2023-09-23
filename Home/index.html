@@ -3,140 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人介绍 - debug967</title>
+    <title>个人介绍 - Debug967</title>
+    <!-- 引入fullPage.js库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css">
     <style>
         body {
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            transition: background-color 0.5s ease-in-out; /* 添加背景颜色过渡效果 */
         }
-        .page-container {
-            display: flex;
-            width: 300%;
-        }
-        .page {
-            width: 33.33%;
+
+        #fullpage {
+            width: 100%;
             height: 100vh;
+        }
+
+        .section {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            padding: 20px;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
         }
-        .page.active {
-            opacity: 1;
-        }
-        .page h1 {
-            font-size: 36px;
-            font-weight: bold;
-        }
-        .page p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
+
         .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid #333;
-            transform: scale(0.8);
-            transition: transform 0.5s ease-in-out;
+            width: 150px;
+            height: 150px;
+            border: 5px solid #333; /* 添加图片框 */
+            border-radius: 50%; /* 将图片裁剪成圆形 */
+            overflow: hidden; /* 隐藏圆形图片外部部分 */
+            margin-bottom: 20px;
+            margin-left: 5px; /* 将头像往右移动 20px */
         }
+
         .profile-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .profile-image:hover {
-            transform: scale(1.0);
+
+        /* 将文字颜色更改为深黑色 */
+        h1,
+        p,
+        li {
+            color: #000;
         }
-        #page1 {
-            background-color: #007bff;
-            color: #fff;
+
+        h1 {
+            font-size: 36px;
+            margin: 0; /* 调整标题的上下边距为0，取消默认的间距 */
+            opacity: 0; /* 初始时设置标题为不可见 */
+            transition: opacity 1s ease-in-out;
         }
-        #page2 {
-            background-color: #333;
-            color: #fff;
+
+        .section.active h1 {
+            opacity: 1;
         }
-        #page3 {
-            background-color: #444;
-            color: #fff;
+
+        p {
+            font-size: 20px;
+            margin: 0; /* 调整段落的上下边距为0，取消默认的间距 */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 18px;
+            margin: 0; /* 调整列表项的上下边距为0，取消默认的间距 */
+        }
+
+        /* 添加动画效果 */
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 自定义滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="page-container">
-        <div id="page1" class="page active">
-            <img class="profile-image" src="your-profile-image.jpg" alt="debug967">
-            <h1>debug967</h1>
-            <p>一名初中生个人开发者</p>
+    <div id="fullpage">
+        <div class="section">
+            <div class="profile-image animated">
+                <img src="https://i0.hdslb.com/bfs/face/619751fe24428c01fe55cb6505dd3dc75047979c.jpg@240w_240h_1c_1s_!web-avatar-space-header.webp" alt="debug967">
+            </div>
+            <h1 class="animated">Debug967</h1>
+            <p class="animated">初中生 个人开发者</p>
         </div>
-        <div id="page2" class="page">
-            <h1>个人简介</h1>
-            <p>你好，我是debug967，一名热爱编程和开发的初中生。我喜欢编写代码，探索新的技术，以及构建有趣的项目。我在各种编程语言和技术领域有一定经验，包括：</p>
+        <div class="section">
+            <h1 class="animated">个人简介</h1>
+            <p class="animated">你好，我是Debug967，一名热爱编程和开发的初中生。我喜欢编写代码，探索新的技术，以及构建有趣的项目。我在各种编程语言和技术领域有一定经验，包括：</p>
             <ul>
-                <li>HTML/CSS</li>
-                <li>JavaScript</li>
-                <li>Python</li>
-                <li>Web开发</li>
-                <li>...</li>
+                <li class="animated">Python</li>
+                <li class="animated">HTML/CSS</li>
+                <li class="animated">JavaScript</li>
+                <li class="animated">C++</li>
+                <li class="animated">...</li>
             </ul>
-            <p>我不仅对编程充满热情，还喜欢学习新知识，分享我的经验和项目。如果你对我的工作感兴趣，或者想合作开发项目，请随时与我联系。</p>
         </div>
-        <div id="page3" class="page">
-            <!-- 添加更多页面内容，根据需要 -->
+        <!-- 联系方式部分 -->
+        <div class="section">
+            <h1 class="animated">联系方式</h1>
+            <p class="animated">你可以通过以下方式联系我：</p>
+            <ul>
+                <li class="animated">Email 1: 1985409711@qq.com</li>
+                <li class="animated">Email 2: debug967@qq.com</li>
+                <li class="animated">BiliBili: <a href="https://space.bilibili.com/502594227" target="_blank">主页</a></li>
+                <li class="animated">QQ: 1985409711</li>
+            </ul>
         </div>
     </div>
 
-    <!-- 使用JavaScript来实现吸附效果 -->
+    <!-- 引入fullPage.js库的JavaScript文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.js"></script>
     <script>
-        const pages = document.querySelectorAll('.page');
-        const pageContainer = document.querySelector('.page-container');
+        new fullpage('#fullpage', {
+            anchors: ['section1', 'section2', 'section3'], // 设置锚点
+            autoScrolling: true, // 启用自动滚动
+            scrollHorizontally: true, // 启用水平滚动
+        });
 
-        let currentPageIndex = 0;
-        let scrolling = false;
+        // 添加动画触发
+        fullpage_api.setAllowScrolling(true);
 
-        function showPage(index) {
-            pages.forEach((page, pageIndex) => {
-                if (pageIndex === index) {
-                    page.classList.add('active');
-                } else {
-                    page.classList.remove('active');
-                }
-            });
-        }
-
-        function scrollToPage(index) {
-            const pageWidth = window.innerWidth;
-            pageContainer.style.transform = `translateX(-${index * pageWidth}px)`;
-        }
-
-        window.addEventListener('wheel', (e) => {
-            if (!scrolling) {
-                if (e.deltaY > 0 && currentPageIndex < pages.length - 1) {
-                    currentPageIndex++;
-                } else if (e.deltaY < 0 && currentPageIndex > 0) {
-                    currentPageIndex--;
-                }
-                showPage(currentPageIndex);
-                scrollToPage(currentPageIndex);
-                scrolling = true;
+        fullpage_api.on('afterSlideLoad', function (section, origin, destination, direction) {
+            const sectionId = section.getAttribute('id');
+            const slideIndex = destination.index;
+            const animatedElements = document.querySelectorAll(`#${sectionId} .animated`);
+            
+            animatedElements.forEach((element, index) => {
                 setTimeout(() => {
-                    scrolling = false;
-                }, 1000); // 防止滚动事件触发过快
-            }
+                    element.classList.add('fadeInUp');
+                }, index * 1000); // 添加延迟以实现逐个元素的动画
+            });
         });
-
-        window.addEventListener('resize', () => {
-            scrollToPage(currentPageIndex);
-        });
-
-        // 初始显示第一页
-        showPage(currentPageIndex);
     </script>
 </body>
 </html>
